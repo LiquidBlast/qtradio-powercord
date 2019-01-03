@@ -1,7 +1,7 @@
 {
-  "name": "qtradio controller",
+  "name": "qtradio",
   "version": "1.0.0",
-  "description": "qtradio controller, because why not?",
+  "description": "Adds qtradio.moe integration to Powercord",
   "author": "LiquidBlast",
   "license": "MIT",
   "repo": "https://github.com/LiquidBlast/qtradio-powercord",
