@@ -1,0 +1,11 @@
+{
+  "name": "qtradio controller",
+  "version": "1.0.0",
+  "description": "qtradio controller, because why not?",
+  "author": "LiquidBlast",
+  "license": "MIT",
+  "repo": "https://github.com/LiquidBlast/qtradio-powercord",
+  "dependencies": [
+    "pc-commands"
+  ]
+}
