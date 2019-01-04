@@ -19,11 +19,25 @@ module.exports = class qtradio extends Plugin {
       .pluginManager
       .get('pc-commands')
       .register(
+        'volume',
+        'Change qtradio.moe volume',
+        'volume <number between 1-100>',
+        async (args) => {
+          const check = (str) => { return !/\D/.test(str); }
+          if (check(args) === false) return;
+          return await get(`http://127.0.0.1:3939/changeVolume?input=${args}`);
+        }
+      )
+
+    powercord
+      .pluginManager
+      .get('pc-commands')
+      .register(
         'np',
-        'Gives you currently playing qtradio song',
+        'Gives you currently playing qtradio.moe song',
         'np',
         async () => {
-          const np = await get('https://qtradio.moe/stats');
+          const np                     = await get('https://qtradio.moe/stats');
           let data                     = np.body.icestats.source[0];
           if (data === undefined) data = np.body.icestats.source;
           return {
