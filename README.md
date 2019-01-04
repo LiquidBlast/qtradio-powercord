@@ -8,4 +8,6 @@ Powercord plugin for qtradio.moe
 ## Commands
 ``toggle`` - Toggle qtradio.moe playback
 
+``volume`` - Change qtradio.moe volume
+
 ``np`` - Gives you currently playing qtradio song
