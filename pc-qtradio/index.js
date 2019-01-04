@@ -23,8 +23,6 @@ module.exports = class qtradio extends Plugin {
         'Change qtradio.moe volume',
         'volume <number between 1-100>',
         async (args) => {
-          const check = (str) => !/\D/.test(str);
-          if (check(args) === false) return;
           return await get(`http://127.0.0.1:3939/changeVolume?input=${args}`);
         }
       )
