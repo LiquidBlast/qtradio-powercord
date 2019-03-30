@@ -1,8 +1,8 @@
-const Plugin  = require('powercord/Plugin');
-const { get } = require('powercord/http');
+const { get }    = require('powercord/http');
+const { Plugin } = require('powercord/entities');
 
 module.exports = class qtradio extends Plugin {
-    start() {
+    startPlugin() {
       powercord
         .pluginManager
         .get('pc-commands')
@@ -46,7 +46,7 @@ module.exports = class qtradio extends Plugin {
         )
     }
 
-    unload() {
+    pluginWillUnload() {
       powercord
         .pluginManager
         .get('pc-commands')
