@@ -10,9 +10,7 @@ module.exports = class qtradio extends Plugin {
           'toggle',
           'Toggle qtradio.moe playback',
           'toggle',
-          async () => {
-            return await get('http://127.0.0.1:3939/togglePlayback');
-          }
+          async () => await get('http://127.0.0.1:3939/togglePlayback')
         )
 
       powercord
@@ -22,9 +20,7 @@ module.exports = class qtradio extends Plugin {
           'volume',
           'Change qtradio.moe volume',
           'volume <number between 1-100>',
-          async (args) => {
-            return await get(`http://127.0.0.1:3939/changeVolume?input=${args}`);
-          }
+          async (args) => await get(`http://127.0.0.1:3939/changeVolume?input=${args}`)
         )
 
       powercord
