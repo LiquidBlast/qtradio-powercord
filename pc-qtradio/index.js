@@ -3,33 +3,29 @@ const { Plugin } = require('powercord/entities');
 
 module.exports = class qtradio extends Plugin {
     startPlugin() {
-      powercord
-        .pluginManager
-        .get('pc-commands')
-        .register(
+      this.registerCommand(
           'toggle',
+		  [],
           'Toggle qtradio.moe playback',
-          'toggle',
+          '{c}',
           async () => await get('http://127.0.0.1:3939/togglePlayback')
         )
 
       powercord
-        .pluginManager
-        .get('pc-commands')
-        .register(
-          'volume',
+        this.registerCommand(
+          'qvolume', //needs to be changes as "volume" command is already used by spotify modal.
+		  [],
           'Change qtradio.moe volume',
-          'volume <number between 1-100>',
+          '{c} <number between 1-100>',
           async (args) => await get(`http://127.0.0.1:3939/changeVolume?input=${args}`)
         )
 
       powercord
-        .pluginManager
-        .get('pc-commands')
-        .register(
+        this.registerCommand(
           'np',
+		  [],
           'Gives you currently playing qtradio.moe song',
-          'np',
+          '{c}',
           async () => {
             const np = await get('https://qtradio.moe/stats');
             let data = np.body.icestats.source[0];
@@ -40,20 +36,5 @@ module.exports = class qtradio extends Plugin {
             };
           }
         )
-    }
-
-    pluginWillUnload() {
-      powercord
-        .pluginManager
-        .get('pc-commands')
-        .unregister('toggle');
-      powercord
-        .pluginManager
-        .get('pc-commands')
-        .unregister('volume');
-      powercord
-        .pluginManager
-        .get('pc-commands')
-        .unregister('np');
     }
 };
