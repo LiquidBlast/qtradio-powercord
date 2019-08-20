@@ -3,6 +3,12 @@ const { Plugin } = require('powercord/entities');
 
 module.exports = class qtradio extends Plugin {
     startPlugin() {
+		let decodeHTML = function (html) {
+			let txt = document.createElement('textarea');
+			txt.innerHTML = html;
+			return txt.value;
+		};
+		
       this.registerCommand(
           'toggle',
 		  [],
@@ -11,7 +17,6 @@ module.exports = class qtradio extends Plugin {
           async () => await get('http://127.0.0.1:3939/togglePlayback')
         )
 
-      powercord
         this.registerCommand(
           'qvolume', //needs to be changes as "volume" command is already used by spotify modal.
 		  [],
@@ -20,21 +25,28 @@ module.exports = class qtradio extends Plugin {
           async (args) => await get(`http://127.0.0.1:3939/changeVolume?input=${args}`)
         )
 
-      powercord
         this.registerCommand(
           'np',
 		  [],
           'Gives you currently playing qtradio.moe song',
           '{c}',
-          async () => {
-            const np = await get('https://qtradio.moe/stats');
-            let data = np.body.icestats.source[0];
-            if (data === undefined) data = np.body.icestats.source;
-            return {
-              send: false,
-              result: data.artist + ' - ' + data.title
-            };
-          }
+          async (args) => {
+				const np = await get('https://qtradio.moe/stats');
+				let data = np.body.icestats.source[1];
+				let decoded = decodeHTML(data.title)
+				if (args == "send") {
+					return {
+						send: true,
+						result: decoded
+					}
+				}
+				else {
+					return {
+						send: false,
+						result: `Currently playing song is: "**${decoded}**".`
+					};
+				}
+			}
         )
     }
 };
